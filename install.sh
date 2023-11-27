@@ -22,13 +22,7 @@ dtoverlay=uart0' | sudo tee -a /boot/firmware/config.txt > /dev/null
 echo " "
 echo "**********************************"
 
-sudo raspi-config nonint do_wayland W1
-sudo raspi-config nonint do_hostname efinder
-sudo raspi-config nonint do_blanking 1
-sudo raspi-config nonint do_vnc 0
-sudo raspi-config nonint do_vnc_resolution 1920x1080
-sudo raspi-config nonint do_serial_hw 0
-sudo raspi-config nonint do_serial_cons 1
+
 
 sudo apt-get install -y libcairo2-dev libnetpbm11-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev swig libcfitsio-dev
 # sudo -u efinder python3 -m pip install --upgrade pip
@@ -96,6 +90,14 @@ mkdir /home/efinder/Solver/Stills
 echo ""
 cp /home/efinder/eFinder64/Solver/*.* /home/efinder/Solver
 cp /home/efinder/Solver/de421.bsp /home/efinder
+
+sudo raspi-config nonint do_wayland W1
+sudo raspi-config nonint do_hostname efinder
+sudo raspi-config nonint do_blanking 1
+sudo raspi-config nonint do_vnc 0
+sudo raspi-config nonint do_vnc_resolution 1920x1080
+sudo raspi-config nonint do_serial_hw 0
+sudo raspi-config nonint do_serial_cons 1
 
 echo "after the reboot vnc should be available at 'efinder.local'"
 echo " username 'efinder'"
