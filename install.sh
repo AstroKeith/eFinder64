@@ -103,7 +103,7 @@ sleep 1
 sudo raspi-config nonint do_vnc_resolution 1920x1080
 sudo raspi-config nonint do_serial_hw 0
 sudo raspi-config nonint do_serial_cons 1
-
+echo ""
+echo "finished at last"
+echo "time to reboot"
 echo "after the reboot vnc should be available at 'efinder.local'"
-echo " username 'efinder'"
-echo " password 'efinder'"
