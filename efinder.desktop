@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=eFinder
-Exec=/home/efinder/venv-efinder/bin/python /home/efinder/Solver/eFinderVNCGUI21_20.py
+Exec=/home/efinder/venv-efinder/bin/python /home/efinder/Solver/eFinder.py
