@@ -89,12 +89,17 @@ mkdir /home/efinder/Solver/Stills
 
 echo ""
 cp /home/efinder/eFinder64/Solver/*.* /home/efinder/Solver
-cp /home/efinder/Solver/de421.bsp /home/efinder
+cp /home/efinder/eFinder64/Solver/de421.bsp /home/efinder
+
+mkdir /home/efinder/.config/autostart
+cp /home/efinder/eFinder64/efinder.desktop /home/efinder/.config/autostart
 
 sudo raspi-config nonint do_wayland W1
 sudo raspi-config nonint do_hostname efinder
 sudo raspi-config nonint do_blanking 1
+sleep 1
 sudo raspi-config nonint do_vnc 0
+sleep 1
 sudo raspi-config nonint do_vnc_resolution 1920x1080
 sudo raspi-config nonint do_serial_hw 0
 sudo raspi-config nonint do_serial_cons 1
