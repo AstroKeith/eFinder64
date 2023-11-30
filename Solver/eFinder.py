@@ -32,7 +32,7 @@ import Display
 
 home_path = str(Path.home())
 version = "21_20"
-os.system('pkill -9 -f eFinder.py') # stops the autostart eFinder program running
+#os.system('pkill -9 -f eFinder.py') # stops the autostart eFinder program running
 x = y = 0  # x, y  define what page the display is showing
 deltaAz = deltaAlt = 0
 expInc = 1 # sets how much exposure changes when using handpad adjust (seconds)
