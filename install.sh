@@ -98,9 +98,7 @@ sudo raspi-config nonint do_wayland W1
 sudo raspi-config nonint do_hostname efinder
 sudo raspi-config nonint do_blanking 1
 sudo raspi-config nonint do_ssh 0
-sleep 1
 sudo raspi-config nonint do_vnc 0
-sleep 1
 sudo raspi-config nonint do_vnc_resolution 1920x1080
 sudo raspi-config nonint do_serial_hw 0
 sudo raspi-config nonint do_serial_cons 1
