@@ -105,5 +105,3 @@ sudo raspi-config nonint do_serial_hw 0
 sudo raspi-config nonint do_serial_cons 1
 
 echo "after the reboot vnc should be available at 'efinder.local'"
-echo " username 'efinder'"
-echo " password 'efinder'"
