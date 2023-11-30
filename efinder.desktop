@@ -1,4 +1,6 @@
+#!/bin/bash
 [Desktop Entry]
 Type=Application
 Name=eFinder
-Exec=/home/efinder/venv-efinder/bin/python /home/efinder/Solver/eFinder.py
+Terminal=true
+Exec=bash -c "sudo raspi-config nonint do_vnc 0 && /home/efinder/venv-efinder/bin/python /home/efinder/Solver/eFinder.py"
