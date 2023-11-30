@@ -97,6 +97,7 @@ cp /home/efinder/eFinder64/efinder.desktop /home/efinder/.config/autostart
 sudo raspi-config nonint do_wayland W1
 sudo raspi-config nonint do_hostname efinder
 sudo raspi-config nonint do_blanking 1
+sudo raspi-config nonint do_ssh 0
 sleep 1
 sudo raspi-config nonint do_vnc 0
 sleep 1
