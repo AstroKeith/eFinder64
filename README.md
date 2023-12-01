@@ -20,3 +20,6 @@ VNC can be used to run the Graphical Display variant by executing in a terminal 
   /venv-efinder/bin/python ~/Solver/eFinderVNCGUI.py run
 
 The 'run' argument at the end causes the autostart version (eFinder.py) to be killed
+
+A forum for builders and users can be found at https://groups.io/g/eFinder
+
