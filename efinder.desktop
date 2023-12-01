@@ -3,4 +3,4 @@
 Type=Application
 Name=eFinder
 Terminal=true
-Exec=bash -c "sudo raspi-config nonint do_vnc 0 && /home/efinder/venv-efinder/bin/python /home/efinder/Solver/eFinder.py"
+Exec=bash -c "sudo raspi-config nonint do_vnc 0 && sudo raspi-config nonint do_vnc_resolution 1920x1080 && /home/efinder/venv-efinder/bin/python /home/efinder/Solver/eFinder.py"
