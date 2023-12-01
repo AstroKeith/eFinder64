@@ -13,7 +13,7 @@ Full details at [
 ## Operation
 The handbox version will autostart on power up.
 
-VNC is enabled at efinder.local
+VNC and ssh is enabled at efinder.local
 
 VNC can be used to run the Graphical Display variant by executing in a terminal window....
 
