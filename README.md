@@ -17,7 +17,7 @@ VNC and ssh is enabled at efinder.local
 
 VNC can be used to run the Graphical Display variant by executing in a terminal window....
 
-  'venv-efinder/bin/python ~/Solver/eFinderVNCGUI.py run'
+  `venv-efinder/bin/python ~/Solver/eFinderVNCGUI.py run`
 
 The 'run' argument at the end causes the autostart version (eFinder.py) to be killed
 
