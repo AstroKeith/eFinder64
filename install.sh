@@ -49,7 +49,7 @@ sudo make install
 sudo sh -c "echo export PATH=$PATH:/usr/local/astrometry/bin >> /etc/profile"
 
 cd /usr/local/astrometry/data
-sudo wget http:/cp /home/efinder/Solver/de421.bsp /home/efinder/data.astrometry.net/4100/index-4107.fits
+sudo wget http://data.astrometry.net/4100/index-4107.fits
 sudo wget http://data.astrometry.net/4100/index-4108.fits
 sudo wget http://data.astrometry.net/4100/index-4109.fits
 sudo wget http://data.astrometry.net/4100/index-4110.fits
