@@ -531,7 +531,7 @@ def image_show():
     lose = (width-panelWidth)/2
     img2 = img2.crop((lose,0,width-lose,height))
     img2 = ImageTk.PhotoImage(img2)
-    panel = tk.Label(window, highlightbackground="red", highlightthickness=2, image=img2)
+    panel = tk.Label(window, highlightbackground="red", highlightthickness=2, bg=b_g, image=img2)
     panel.configure(image=img2)
     panel.image = img2
     panel.place(x=220, y=pad, width=panelWidth, height=height)
@@ -622,7 +622,7 @@ def annotate_image():
         img3 = enhancer.enhance(3)
         
         img4 = ImageTk.PhotoImage(img3)
-        panel = tk.Label(window, highlightbackground="red", highlightthickness=2, image=img4)
+        panel = tk.Label(window, highlightbackground="red", highlightthickness=2, bg=b_g, image=img4)
         panel.configure(image=img4)
         panel.image = img4
         panel.place(x=220, y=pad, width=panelWidth, height=height)
