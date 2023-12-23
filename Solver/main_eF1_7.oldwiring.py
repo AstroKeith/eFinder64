@@ -12,7 +12,7 @@ SCK = 10
 CS = 9
 ln = ["ScopeDog","with eFinder","waiting for host"]
 
-version = "main_eF1_3"
+version = "main_eF1_7"
 
 class OLED_2inch23(framebuf.FrameBuffer):
     def __init__(self):
@@ -96,9 +96,10 @@ def send_pin(p):
             if p.value()== True: 
                 return
         time.sleep(0.3)
+        id = (''.join(char for char in str(p) if char.isdigit()))
         if p.value()==True:
-            print(str(p)[4:6])
-        elif str(p)[4:6]=='20':
+            print(id)
+        elif id=='20':
             print("21")
             time.sleep(1)
         time.sleep(0.1)
@@ -116,9 +117,9 @@ def read_joystick():
             j_x = '41'
         else:
             j_x = '42'
-        if j_x != ref_x:
+        if j_x != ref_x: # new result
             print (j_x)
-            ref_x = j_x
+            ref_x = j_x # remember current result
         read_y = joy_y.read_u16()
         if read_y > 40000:
             j_y = "33"
@@ -129,7 +130,7 @@ def read_joystick():
         if j_y != ref_y:
             print (j_y)
             ref_y = j_y
-        time.sleep(0.1)
+        time.sleep(0.2)
 
 def adj_brightness(p):
     global contrast, ln
@@ -140,7 +141,8 @@ def adj_brightness(p):
             return
     time.sleep(0.3)
     if p.value()==True:
-        if str(p)[4:6]== '17': #up
+        id = (''.join(char for char in str(p) if char.isdigit()))
+        if id == '17': #up
             if contrast < 239:
                 contrast = contrast + 16
         elif str(p)[4:6]== '19': #down
@@ -225,6 +227,8 @@ if __name__=='__main__':
                     dim_display(contrast)
                     save_contrast(contrast)
                 if ln[2][0:10] == 'Bright Adj':
+                    ln[0] = 'ver:'+version
+                    ln[1] = 'Handpad Display'
                     ln[2] = 'Bright Adj '+str(contrast)
                     up.irq(trigger=Pin.IRQ_FALLING, handler=adj_brightness)
                     down.irq(trigger=Pin.IRQ_FALLING, handler=adj_brightness)
