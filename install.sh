@@ -11,19 +11,6 @@ sudo apt upgrade -y
 
 HOME=/home/efinder
 
-
-
-echo "***********************************"
-echo " "
-echo 'dtoverlay=disable-bt
-enable_uart=1
-dtparam=uart0=on
-dtoverlay=uart0' | sudo tee -a /boot/firmware/config.txt > /dev/null
-echo " "
-echo "**********************************"
-
-
-
 sudo apt-get install -y libcairo2-dev libnetpbm11-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev swig libcfitsio-dev
 # sudo -u efinder python3 -m pip install --upgrade pip
 
