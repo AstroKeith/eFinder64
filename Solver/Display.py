@@ -49,7 +49,9 @@ class Handpad:
         line2 (str): The third line to display.  This line is not displayed on the LCD module.
         """
         self.box.write(bytes(("0:" + line0 + "\n").encode("UTF-8")))
+        time.sleep(0.05)
         self.box.write(bytes(("1:" + line1 + "\n").encode("UTF-8")))
+        time.sleep(0.05)
         self.box.write(bytes(("2:" + line2 + "\n").encode("UTF-8")))
 
     def get_box(self) -> serial.Serial:
