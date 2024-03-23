@@ -3,7 +3,7 @@ from shutil import copyfile
 import time
 from CameraInterface import CameraInterface
 import zwoasi as asi
-import Display
+import Display_64
 import cv2
 import qhyccd
 from ctypes import *
@@ -14,7 +14,7 @@ from datetime import timezone
 class QHYCamera(CameraInterface):
     """The camera class for ZWO cameras.  Implements the CameraInterface interface."""
 
-    def __init__(self, handpad: Display) -> None:
+    def __init__(self, handpad: Display_64) -> None:
         """Initializes the QHY camera
 
         Parameters:
