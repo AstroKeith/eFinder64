@@ -53,8 +53,8 @@ cd $HOME
 sudo -u efinder git clone https://github.com/AstroKeith/eFinder64.git
 
 cd eFinder64
+
 tar xf ASI_linux_mac_SDK_V1.31.tar.bz2
-cp /home/efinder/Solver/de421.bsp /home/efinder
 cd ASI_linux_mac_SDK_V1.31/lib
 
 sudo mkdir /lib/zwoasi
