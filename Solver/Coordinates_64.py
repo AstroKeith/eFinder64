@@ -1,11 +1,11 @@
 import math
 from typing import Tuple
-from skyfield.api import load
+from skyfield.api import load, Star
 from skyfield.timelib import Timescale
 from skyfield.vectorlib import VectorSum
 import Nexus_64
 
-
+# ver 2
 class Coordinates:
     """Coordinates utility class"""
 
@@ -13,6 +13,7 @@ class Coordinates:
         """Initialize the coordinates class, load the planets information, create earth and timescale"""
         self.planets = load("de421.bsp")
         self.earth = self.planets["earth"]
+        self.moon = self.planets["moon"]
         self.ts = load.timescale()
 
     def conv_altaz(self, nexus: Nexus_64, ra: float, dec: float) -> Tuple[float, float]:
@@ -64,7 +65,7 @@ class Coordinates:
         return dms
 
     def dd2aligndms(self, dd: float) -> str:
-        """Convert decimal degrees to a string (dd*mm:ss)
+        """Convert decimal degrees to a string (sDD*MM:SS)
 
         Parameters:
         dd (float): The degrees to convert
@@ -123,3 +124,13 @@ class Coordinates:
         VectorSum: The VectorSum of the earth
         """
         return self.earth
+    
+    def get_moon(self) -> VectorSum:
+        """Returns the moon object
+
+        Returns:
+        VectorSum: The VectorSum of the moon
+        """
+        return self.moon
+
+    

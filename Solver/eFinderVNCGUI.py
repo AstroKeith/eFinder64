@@ -36,11 +36,11 @@ import fitsio
 import threading
 import Nexus_64
 import Coordinates_64
-import Display
+import Display_64
 import Dummy
 import usbAssign
 
-version = "21_21_VNC"
+version = "21_22_VNC"
 
 if len(sys.argv) > 1:
     os.system("pkill -9 -f eFinder.py")  # stops the autostart eFinder program running
@@ -997,7 +997,7 @@ def saveImage():
 usbtty = usbAssign.usbAssign()
 try:
     if usbtty.get_handbox_usb():
-        handpad = Display.Handpad(version)
+        handpad = Display_64.Handpad(version)
         scan = threading.Thread(target=reader)
         scan.daemon = True
         scan.start()

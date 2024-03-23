@@ -36,11 +36,11 @@ import fitsio
 import threading
 import Nexus_64
 import Coordinates_64
-import Display
+import Display_64
 import Dummy
 import usbAssign
 
-version = "GUI21_1"
+version = "GUI21_2"
 
 if len(sys.argv) > 1:
     os.system("pkill -9 -f eFinder.py")  # stops the autostart eFinder program running
@@ -1207,7 +1207,7 @@ def doExit():
 usbtty = usbAssign.usbAssign()
 try:
     if usbtty.get_handbox_usb():
-        handpad = Display.Handpad(version)
+        handpad = Display_64.Handpad(version)
         scan = threading.Thread(target=reader)
         scan.daemon = True
         scan.start()

@@ -6,14 +6,14 @@ from datetime import datetime, timedelta
 import os
 import math
 import re
-import Display
+import Display_64
 import Coordinates_64
-
+import usbAssign
 
 class Nexus:
     """The Nexus utility class"""
 
-    def __init__(self, handpad: Display, coordinates: Coordinates_64) -> None:
+    def __init__(self, handpad: Display_64, coordinates: Coordinates_64) -> None:
         """Initializes the Nexus DSC
 
         Parameters:
@@ -28,9 +28,14 @@ class Nexus:
         self.short = "no RADec"
         self.long = 0
         self.lat = 0
-
+        self.earth,self.moon = coordinates.get_earth(), coordinates.get_moon()
+        self.ts = coordinates.get_ts()
+        #self.ts = load.timescale()
+        usbtty = usbAssign.usbAssign()
+        dev_name = usbtty.get_Nexus_usb()
+        print ("Nexus DSC is connected to:",dev_name)
         try:
-            self.ser = serial.Serial("/dev/ttyAMA0", baudrate=9600)
+            self.ser = serial.Serial(dev_name, baudrate=9600)
             self.ser.write(b":P#")
             time.sleep(0.1)
             p = str(self.ser.read(self.ser.in_waiting), "ascii")
@@ -47,8 +52,7 @@ class Nexus:
             self.handpad.display("Found Nexus", "via USB", "")
             time.sleep(1)
             self.nexus_link = "USB"
-        except Exception as ex:
-            print(ex)
+        except:
             self.HOST = "10.0.0.1"
             self.PORT = 4060
             try:
@@ -115,6 +119,7 @@ class Nexus:
         Lg = self.get(":Gg#")[0:7].split("*")
         self.long = -1 * float(Lg[0] + "." + Lg[1])
         self.location = self.coordinates.get_earth() + wgs84.latlon(self.lat, self.long)
+        self.site = wgs84.latlon(self.lat,self.long)
         local_time = self.get(":GL#")
         local_date = self.get(":GC#")
         local_offset = float(self.get(":GG#"))
@@ -151,17 +156,21 @@ class Nexus:
         Returns:
         np.array: The updated arr variable to show on the handpad
         """
-        ra = self.get(":GR#").split(":")
-        dec = re.split(r"[:*]", self.get(":GD#"))
-        self.radec = (
-            float(ra[0]) + float(ra[1]) / 60 + float(ra[2]) / 3600
-        ), math.copysign(
-            abs(abs(float(dec[0])) + float(dec[1]) / 60 + float(dec[2]) / 3600),
-            float(dec[0]),
-        )
-        self.altaz = self.coordinates.conv_altaz(self, *(self.radec))
-        self.scope_alt = self.altaz[0] * math.pi / 180
-        self.short = ra[0]+ra[1]+dec[0]+dec[1]
+        try:
+            ra = self.get(":GR#").split(":")
+            dec = re.split(r"[:*]", self.get(":GD#"))
+            self.radec = (
+                float(ra[0]) + float(ra[1]) / 60 + float(ra[2]) / 3600
+            ), math.copysign(
+                abs(abs(float(dec[0])) + float(dec[1]) / 60 + float(dec[2]) / 3600),
+                float(dec[0]),
+            )
+
+            self.altaz = self.coordinates.conv_altaz(self, *(self.radec))
+            self.scope_alt = self.altaz[0] * math.pi / 180
+            self.short = ra[0]+ra[1]+dec[0]+dec[1]
+        except:
+            print('read_altAz error:',ra,dec)
         '''
         print(
             "Nexus RA:  ",
@@ -186,13 +195,21 @@ class Nexus:
         return self.short
         
     def get_location(self):
-        """Returns the location on earth of the observer
+        """Returns the location in space of the observer
 
         Returns:
         location: The location
         """
         return self.location
+    
+    def get_site(self):
+        """Returns the location on earth of the observer
 
+        Returns:
+        location: The site
+        """
+        return self.site
+    
     def get_long(self):
         """Returns the longitude of the observer
 
@@ -270,3 +287,17 @@ class Nexus:
         Parameters:
         scope_alt: The altitude of the telescope"""
         self.scope_alt = scope_alt
+        
+    def get_lunar_rates(self):
+        t = self.ts.now()
+        a = self.get_location().at(t).observe(self.moon).apparent()
+        alt, az, distance, alt_rate, az_rate, range_rate = (a.frame_latlon_and_rates(self.site))
+        ra,dec,d = a.radec()
+        return (ra.hours,dec.degrees,alt.degrees,alt_rate.arcseconds.per_second,az_rate.arcseconds.per_second)
+    
+    def get_rate(self,ra,dec):
+        t = self.ts.now()
+        scope = Star(ra_hours = ra,dec_degrees = dec)
+        a = self.get_location().at(t).observe(scope).apparent()
+        alt, az, distance, alt_rate, az_rate, range_rate = (a.frame_latlon_and_rates(self.site))
+        return (alt,az,alt_rate.arcseconds.per_second,az_rate.arcseconds.per_second)

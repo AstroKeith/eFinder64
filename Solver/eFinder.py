@@ -29,10 +29,10 @@ from pathlib import Path
 import fitsio
 import Nexus_64
 import Coordinates_64
-import Display
+import Display_64
 
 home_path = str(Path.home())
-version = "21_21"
+version = "21_22"
 
 if len(sys.argv) > 1:
     os.system('pkill -9 -f eFinder.py') # stops the autostart eFinder program running
@@ -499,7 +499,7 @@ def home_refresh():
 
 # main code starts here
 
-handpad = Display.Handpad(version)
+handpad = Display_64.Handpad(version)
 coordinates = Coordinates_64.Coordinates()
 nexus = Nexus_64.Nexus(handpad, coordinates)
 nexus.read()
