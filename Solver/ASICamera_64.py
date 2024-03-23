@@ -5,13 +5,13 @@ import datetime
 from datetime import timezone
 from CameraInterface import CameraInterface
 import zwoasi as asi
-import Display
+import Display_64
 
 
 class ASICamera(CameraInterface):
     """The camera class for ASI cameras.  Implements the CameraInterface interface."""
 
-    def __init__(self, handpad: Display) -> None:
+    def __init__(self, handpad: Display_64) -> None:
         """Initializes the ASI camera
 
         Parameters:
