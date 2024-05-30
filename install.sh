@@ -4,7 +4,7 @@ echo "eFinder install"
 echo "This will take some time! ( > 30 minutes)"
 echo " "
 echo "*****************************************************************************"
-sudo rpi-update -y
+#sudo rpi-update -y
 
 sudo apt update
 sudo apt upgrade -y
