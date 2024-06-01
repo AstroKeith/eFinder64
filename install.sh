@@ -14,10 +14,10 @@ HOME=/home/efinder
 sudo apt-get install -y libcairo2-dev libnetpbm11-dev netpbm libpng-dev libjpeg-dev zlib1g-dev libbz2-dev swig libcfitsio-dev
 # sudo -u efinder python3 -m pip install --upgrade pip
 
-sudo apt install python3-fitsio
+sudo apt install -y python3-fitsio
 sudo apt install -y imagemagick
 sudo apt install -y python3-skyfield
-sudo apt install python3-pil.imagetk
+sudo apt install -y python3-pil.imagetk
 
 python -m venv /home/efinder/venv-efinder --system-site-packages
 venv-efinder/bin/python venv-efinder/bin/pip install astropy pyfits
