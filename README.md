@@ -10,6 +10,16 @@ Requires:
 Full details at [
 ](https://astrokeith.com/equipment/efinder/)https://astrokeith.com/equipment/efinder/
 
+# Version notes
+eFinder21_23.py is the latest stable version.
+eFinder24_2.py adds support for the Pi HQ camera, a minor update and should be bug free.
+eFinder25_1 adds a focus screen utility and is a significant update, not fully tested yet.
+  It requires the handpad to use main_eF2_1.py.
+  It requires Tetra3 to be installed
+  if the focus screen gets corrupted, this is due to memory leak in the Pico which I thought I had dealt with! Then use main_eF3_1.py (eFinder only not compatible with ScopeDog)
+  eFinder25_1 requires the new Display_64.py
+The new Nexus_64.py is recommended to deal with a start up bug causing the Nexus to not alwyas being recognised.
+
 ## Operation
 The handbox version will autostart on power up.
 
