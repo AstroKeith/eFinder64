@@ -69,6 +69,10 @@ class Handpad:
         time.sleep(0.05)
         self.box.write(bytes(("2:" + line2.ljust(14) + " " + str(jStickSpeed) + "\n").encode("UTF-8")))
 
+    def dispWrite(self,line):
+        self.box.write(bytes(line.encode("UTF-8")))
+
+        
     def get_box(self) -> serial.Serial:
         """Returns the box variable
 
