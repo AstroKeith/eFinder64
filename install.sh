@@ -21,6 +21,7 @@ sudo apt install -y python3-pil.imagetk
 
 python -m venv /home/efinder/venv-efinder --system-site-packages
 venv-efinder/bin/python venv-efinder/bin/pip install astropy pyfits
+venv-efinder/bin/python venv-efinder/bin/pip install git+https://github.com/esa/tetra3.git
 
 cd $HOME
 sudo -u efinder git clone https://github.com/dstndstn/astrometry.net.git
