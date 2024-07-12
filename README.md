@@ -18,6 +18,7 @@ eFinder25_1 adds a focus screen utility and is a significant update, not fully t
 - It requires Tetra3 to be installed
 - if the focus screen gets corrupted, this is due to memory leak in the Pico which I thought I had dealt with! Then use main_eF3_1.py (eFinder only not compatible with ScopeDog)
 - eFinder25_1 requires the new Display_64.py
+- text.ttf is required
 
 The new Nexus_64.py is recommended to deal with a start up bug causing the Nexus to not alwyas being recognised.
 
