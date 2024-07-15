@@ -75,6 +75,20 @@ echo "tmpfs /var/tmp tmpfs nodev,nosuid,size=100M 0 0" | sudo tee -a /etc/fstab 
 mkdir /home/efinder/Solver
 mkdir /home/efinder/Solver/Stills
 
+sudo apt install -y samba samba-common-bin
+sudo tee -a /etc/samba/smb.conf > /dev/null <<EOT
+[efindershare]
+path = /home/efinder
+writeable=Yes
+create mask=0777
+directory mask=0777
+public=no
+EOT
+username="efinder"
+pass="efinder"
+(echo $pass; sleep 1; echo $pass) | sudo smbpasswd -a -s $username
+sudo systemctl restart smbd
+
 echo ""
 cp /home/efinder/eFinder64/Solver/*.* /home/efinder/Solver
 cp /home/efinder/eFinder64/Solver/de421.bsp /home/efinder
