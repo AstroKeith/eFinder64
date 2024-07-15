@@ -47,6 +47,7 @@ sudo wget http://data.astrometry.net/hd.fits
 sudo wget http://data.astrometry.net/hip.fits
 sudo wget https://github.com/dstndstn/astrometry.net/tree/main/catalogs/abell-all.fits
 
+cd $HOME
 python -m venv /home/efinder/venv-efinder --system-site-packages
 venv-efinder/bin/python venv-efinder/bin/pip install astropy pyfits
 mkdir /home/efinder/Solver
@@ -54,6 +55,7 @@ mkdir /home/efinder/Solver/Stills
 mkdir /home/efinder/Solver/data
 mkdir /home/efinder/Solver/images
 
+cd $HOME
 echo " "
 echo "*****************************************************************************"
 echo "Downloading Tetra databases"
@@ -103,8 +105,8 @@ sudo systemctl restart smbd
 echo ""
 cp /home/efinder/eFinder64/Solver/*.* /home/efinder/Solver
 cp /home/efinder/eFinder64/Solver/de421.bsp /home/efinder
-cp /home/efinder/eFinder_Lite/Solver/starnames.csv /home/efinder/Solver/data
-cp /home/efinder/eFinder_Lite/Solver/generate_database.py /home/venv-efinder/lib/python3.11/site-packages/tetra3
+cp /home/efinder/eFinder64/Solver/starnames.csv /home/efinder/Solver/data
+cp /home/efinder/eFinder64/Solver/generate_database.py /home/efinder/venv-efinder/lib/python3.11/site-packages/tetra3
 
 mkdir /home/efinder/.config/autostart
 cp /home/efinder/eFinder64/efinder.desktop /home/efinder/.config/autostart
