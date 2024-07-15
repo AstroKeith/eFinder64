@@ -592,9 +592,9 @@ def loopFocus():
                 for bit in range (0,8):
                     digit = str(np_img[page*8+bit][x])
                     byte = digit + byte
-                ch = str(int(byte,2))
-                handpad.dispWrite(ch+'\n')
-        handpad.dispWrite("z\n")
+                ch = ch + str(int(byte,2))+','
+        ch = ch.strip(',')
+        handpad.dispWrite(ch+'\n')
 
 def adjExp(i):
     global param
