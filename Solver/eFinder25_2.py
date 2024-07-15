@@ -585,7 +585,7 @@ def loopFocus():
         screen.paste(imgPlot,box=(80,0))
         #screen.show()
         np_img = np.asarray(screen, dtype=np.uint8)
-        
+        ch = ''
         for page in range (0,4):
             for x in range(0,128):
                 digit = byte = ""
