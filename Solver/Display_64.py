@@ -70,6 +70,7 @@ class Handpad:
         self.box.write(bytes(("2:" + line2.ljust(14) + " " + str(jStickSpeed) + "\n").encode("UTF-8")))
 
     def dispWrite(self,line):
+        self.box.flush()
         self.box.write(bytes(line.encode("UTF-8")))
 
         
