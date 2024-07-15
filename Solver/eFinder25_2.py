@@ -33,7 +33,7 @@ import Display_64
 import tetra3
 
 home_path = str(Path.home())
-version = "25_1"
+version = "25_2"
 
 if len(sys.argv) > 1:
     os.system('pkill -9 -f eFinder.py') # stops the autostart eFinder program running
