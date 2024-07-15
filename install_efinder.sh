@@ -32,6 +32,7 @@ make
 make py
 make extra
 sudo make install
+
 sudo sh -c "echo export PATH=$PATH:/usr/local/astrometry/bin >> /etc/profile"
 cd /usr/local/astrometry/data
 sudo wget http://data.astrometry.net/4100/index-4107.fits
@@ -68,7 +69,6 @@ sudo wget https://cdsarc.u-strasbg.fr/ftp/cats/I/239/hip_main.dat
 cd $HOME
 
 sudo -u efinder git clone https://github.com/AstroKeith/eFinder64.git
-
 cd eFinder64
 
 tar xf ASI_linux_mac_SDK_V1.31.tar.bz2
@@ -80,11 +80,9 @@ sudo cp armv8/*.* /lib/zwoasi/armv8
 sudo install asi.rules /lib/udev/rules.d
 
 cd $HOME
-
 venv-efinder/bin/python venv-efinder/bin/pip install zwoasi
 
 cd $HOME
-
 echo "tmpfs /var/tmp tmpfs nodev,nosuid,size=100M 0 0" | sudo tee -a /etc/fstab > /dev/null
 
 
