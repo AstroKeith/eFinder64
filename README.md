@@ -11,16 +11,13 @@ Full details at [
 ](https://astrokeith.com/equipment/efinder/)https://astrokeith.com/equipment/efinder/
 
 # Version notes
-eFinder21_23.py is the latest stable version.
-eFinder24_2.py adds support for the Pi HQ camera, a minor update and should be bug free.
-eFinder25_2 adds a focus screen utility and is a significant update, not fully tested yet.
+eFinder25_3.py is the latest stable version.
+Adds support for the Pi HQ camera, a focus/exposure screen utility and web page server.
 - It requires the handpad to use main_eF4_1.py.
 - It requires Tetra3 to be installed
-- eFinder25_1 requires the new Display_64.py
+- Requires the new Display_64.py & Nexus_64.py (best to do a complete new pull_
 - starnames.csv is required
 - text.ttf is required
-
-The new Nexus_64.py is recommended to deal with a start up bug causing the Nexus to not alwyas being recognised.
 
 ## Operation
 The handbox version will autostart on power up.
