@@ -95,8 +95,8 @@ echo $html;
 </html>
 <?php
 
-$image = '/home/efinder/Solver/images/image.png';
+$image = '/home/efinder/Solver/images/image.jpg';
 $imageData = base64_encode(file_get_contents($image));
-echo '<img src="data:image/png;base64,'.$imageData.'">';
+echo '<img src="data:image/jpg;base64,'.$imageData.'">';
 ?>
 
