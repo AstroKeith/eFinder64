@@ -1,8 +1,5 @@
 import time
 import serial
-#import threading
-#import select
-#import subprocess
 import usbAssign
 jStickSpeed = ""
 
@@ -72,6 +69,7 @@ class Handpad:
     def dispWrite(self,line):
         self.box.flush()
         self.box.write(bytes(line.encode("UTF-8")))
+        #print(line)
 
         
     def get_box(self) -> serial.Serial:
