@@ -522,7 +522,7 @@ def loopFocus():
         screen.paste(im,box=(0,0))
         screen.paste(txtPlot,box=(35,0))
         screen.paste(imgPlot,box=(80,0))
-        #screen.show()
+        screen.save('/home/efinder/Solver/images/image.jpg')
         np_img = np.asarray(screen, dtype=np.uint8)
         ch = ''
         for page in range (0,4):
@@ -540,6 +540,17 @@ def adjExp(i):
     param['Exposure'] = ('%.1f' % (float(param['Exposure']) + i*0.2))
     update_summary()
     loopFocus()
+
+def saveImage():
+    with Image.open("/var/tmp/solve/capture.jpg") as img:
+        img = img.convert(mode='L')
+    annotated = ImageDraw.Draw(img)
+    annotated.rectangle((0,0,img.size[0],img.size[1]),outline='white',width=2)
+    sta = datetime.datetime.now(timezone.utc)
+    stamp = sta.strftime("%d%m%y_%H%M%S")
+    annotated.text((4,4),stamp,font = fnt,fill='white')
+    img.save(home_path + "/Solver/images/image.jpg")
+    handpad.display(arr[x, y][0], arr[x, y][1], "image saved")
 
 # main code starts here
 
@@ -577,7 +588,7 @@ sol = [
     "left_right(-1)",
     "left_right(1)",
     "go_solve()",
-    "",
+    "saveImage()",
 ]
 
 polar = [
