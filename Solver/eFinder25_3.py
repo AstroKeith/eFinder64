@@ -18,7 +18,7 @@ import time
 import os
 import math
 import sys
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 import psutil
 import re
 from skyfield.api import Star
@@ -31,6 +31,9 @@ import Nexus_64
 import Coordinates_64
 import Display_64
 import tetra3
+import datetime
+from datetime import timezone
+from shutil import copyfile
 
 home_path = str(Path.home())
 version = "25_3"
@@ -48,6 +51,7 @@ star_name = "no star"
 solve = False
 sDog = True
 gotoFlag = False
+fnt = ImageFont.truetype(home_path+"/Solver/text.ttf",8)
 
 try:
     os.mkdir("/var/tmp/solve")
@@ -484,9 +488,9 @@ def loopFocus():
         fnt = ImageFont.truetype(home_path+"/Solver/text.ttf",8)
 
         patch = np_image[x1:x2,y1:y2]
-        im = Image.fromarray(np.uint8(patch),'L')
-        im = im.resize((32,32),Image.LANCZOS)
-        im = im.convert(mode='1')
+        imp = Image.fromarray(np.uint8(patch),'L')
+        imp = imp.resize((32,32),Image.LANCZOS)
+        im = imp.convert(mode='1')
 
         imgPlot = Image.new("1",(32,32))
         shape=[]
@@ -522,7 +526,17 @@ def loopFocus():
         screen.paste(im,box=(0,0))
         screen.paste(txtPlot,box=(35,0))
         screen.paste(imgPlot,box=(80,0))
-        screen.save('/home/efinder/Solver/images/image.jpg')
+        # create image for saving
+        img = ImageEnhance.Contrast(img).enhance(5)
+        combo = ImageDraw.Draw(img)
+        combo.rectangle((0,0,65,65),outline='white',width=2)
+        combo.rectangle((0,0,img.size[0],img.size[1]),outline='white',width=2)
+        combo.text((70,5),"Peak = "+ str(np.max(np_image)) + "   Number of centroids = "+ str(int(centroids.size/2)) + "    Exposure = "+str(param['Exposure'])+ 'secs',font = fnt,fill='white')
+        imp = imp.resize((64,64),Image.LANCZOS)
+        imp = ImageEnhance.Contrast(imp).enhance(5)
+        img.paste(imp,box=(1,1))
+        img.save('/home/efinder/Solver/images/image.jpg')
+
         np_img = np.asarray(screen, dtype=np.uint8)
         ch = ''
         for page in range (0,4):
