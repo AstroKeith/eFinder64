@@ -108,11 +108,22 @@ cp /home/efinder/eFinder64/Solver/de421.bsp /home/efinder
 cp /home/efinder/eFinder64/Solver/starnames.csv /home/efinder/Solver/data
 cp /home/efinder/eFinder64/Solver/generate_database.py /home/efinder/venv-efinder/lib/python3.11/site-packages/tetra3
 
+echo " "
+echo "*****************************************************************************"
+echo "Setting up web page server"
+echo "*****************************************************************************"
+sudo apt-get install -y apache2
+sudo apt-get install -y php8.2
+sudo chmod a+rwx /home/efinder
+sudo chmod a+rwx /home/efinder/Solver
+sudo chmod a+rwx /home/efinder/Solver/eFinder.config
+sudo cp eFinder_Lite/Solver/www/*.* /var/www/html
+sudo mv /var/www/html/index.html /var/www/html/apacheindex.html
+
 mkdir /home/efinder/.config/autostart
 cp /home/efinder/eFinder64/efinder.desktop /home/efinder/.config/autostart
 
 sudo raspi-config nonint do_vnc 0
-sudo raspi-config nonint do_hostname efinder
 sudo raspi-config nonint do_blanking 1
 sudo raspi-config nonint do_ssh 0
 sudo raspi-config nonint do_serial_hw 0
