@@ -117,7 +117,7 @@ sudo apt-get install -y php8.2
 sudo chmod a+rwx /home/efinder
 sudo chmod a+rwx /home/efinder/Solver
 sudo chmod a+rwx /home/efinder/Solver/eFinder.config
-sudo cp eFinder_Lite/Solver/www/*.* /var/www/html
+sudo cp eFinder64/Solver/www/*.* /var/www/html
 sudo mv /var/www/html/index.html /var/www/html/apacheindex.html
 
 mkdir /home/efinder/.config/autostart
