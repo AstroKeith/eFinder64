@@ -11,7 +11,7 @@ Full details at [
 ](https://astrokeith.com/equipment/efinder/)https://astrokeith.com/equipment/efinder/
 
 # Version notes
-eFinder25_3.py is the latest stable version.
+eFinder25_4.py is the latest stable version.
 Adds support for the Pi HQ camera, a focus/exposure screen utility and web page server.
 - It requires the handpad to use main_eF4_1.py.
 - It requires Tetra3 to be installed
