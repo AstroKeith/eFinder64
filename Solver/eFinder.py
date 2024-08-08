@@ -11,7 +11,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # This variant is customised for ZWO ASI ccds as camera, Nexus DSC as telescope interface
-# It requires astrometry.net installed
+# It requires astrometry.net & Cedar-detect/solve installed
 
 import subprocess
 import time
@@ -36,7 +36,7 @@ from datetime import timezone
 from shutil import copyfile
 
 home_path = str(Path.home())
-version = "25_3"
+version = "25_4"
 
 if len(sys.argv) > 1:
     os.system('pkill -9 -f eFinder.py') # stops the autostart eFinder program running
@@ -459,6 +459,7 @@ def home_refresh():
             time.sleep (0.5)
             
 def loopFocus():
+    global x,y
     print('start focus')
     capture()
     with Image.open(destPath + "capture.jpg") as img:
@@ -468,9 +469,14 @@ def loopFocus():
             np_image,
             downsample=2,
             )
-
-        print(centroids[0])
         print(centroids.size/2, 'centroids found ')
+        if centroids.size < 1:
+            handpad.display('No stars found','','')
+            time.sleep(3)
+            handpad.display(arr[x, y][0], arr[x, y][1], arr[x, y][2])
+            return
+        print(centroids[0])
+        
 
         w=16
         x1=int(centroids[0][0]-w)
@@ -507,16 +513,6 @@ def loopFocus():
             #print(np_image[x1+w][h],end=' ')
             shape.append(((h-y1),int((255-np_image[x1+w][h])/8)))
 
-        draw = ImageDraw.Draw(imgPlot)
-        draw.line(shape,fill="white",width=1)
-
-        midLine = ""
-        y = int((255-np.max(np_image)/2)/8)
-        np_plot = np.array(imgPlot)
-        for x in range (0,31):
-            val = str(int(np_plot[y][x]))
-            midLine = midLine + val
-
         txtPlot = Image.new("1",(50,32))
         txt = ImageDraw.Draw(txtPlot)
         txt.text((0,0),"Pk="+ str(np.max(np_image)),font = fnt,fill='white')
@@ -540,10 +536,10 @@ def loopFocus():
         np_img = np.asarray(screen, dtype=np.uint8)
         ch = ''
         for page in range (0,4):
-            for x in range(0,128):
+            for column in range(0,128):
                 digit = byte = ""
                 for bit in range (0,8):
-                    digit = str(np_img[page*8+bit][x])
+                    digit = str(np_img[page*8+bit][column])
                     byte = digit + byte
                 ch = ch + str(int(byte,2))+','
         ch = ch.strip(',')
