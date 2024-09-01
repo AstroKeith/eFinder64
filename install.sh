@@ -15,6 +15,8 @@ echo "**************************************************************************
 sudo apt install -y python3-pil.imagetk
 sudo apt install -y imagemagick
 
+echo 'dtoverlay=uart2' | sudo tee -a /boot/firmware/config.txt > /dev/null
+
 HOME=/home/efinder
 echo " "
 echo "*****************************************************************************"
