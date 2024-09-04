@@ -111,7 +111,7 @@ def send_ok(p):
         for n in range(5):
             if p.value()== True: 
                 return
-        time.sleep(1)
+        time.sleep(0.5)
         id = (''.join(char for char in str(p) if char.isdigit()))
         if p.value()==True:
             print(id)
