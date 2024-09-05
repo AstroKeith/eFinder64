@@ -8,7 +8,7 @@ class usbAssign:
         if "Pi 4" in res:
             self.usbNexus = "/dev/ttyS0"
         else:
-            self.usbNexus = "/dev/ttyAMA0"
+            self.usbNexus = "/dev/ttyAMA3"
         self.usbServocat = "/dev/ttyUSB0"
         self.usbGps = "not found"
         all_ports = list_ports.comports()
