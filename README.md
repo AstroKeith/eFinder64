@@ -10,6 +10,8 @@ Requires:
 Full details at [
 ](https://astrokeith.com/equipment/efinder/)https://astrokeith.com/equipment/efinder/
 
+Note: As of September 2024 uart3 is used instead of uart0. Old hardware builds will need to be modified (switch two pairs of wires on the GPIO)
+
 # Version notes
 eFinder25_4.py is the latest stable version.
 Adds support for the Pi HQ camera, a focus/exposure screen utility and web page server.
