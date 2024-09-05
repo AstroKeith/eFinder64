@@ -8,8 +8,9 @@ import math
 import re
 import Display_64
 import Coordinates_64
+import usbAssign
 
-#updated 24/1/2024
+# updated 5 Sep 2024
 
 class Nexus:
     """The Nexus utility class"""
@@ -29,9 +30,11 @@ class Nexus:
         self.short = "no RADec"
         self.long = 0
         self.lat = 0
+        usbtty = usbAssign.usbAssign()
+        dev_name = usbtty.get_Nexus_usb()
 
         try:
-            self.ser = serial.Serial("/dev/ttyAMA0", baudrate=9600)
+            self.ser = serial.Serial(device, baudrate=9600)
             time.sleep(0.1)
             self.ser.write(b":P#")
             time.sleep(0.1)
