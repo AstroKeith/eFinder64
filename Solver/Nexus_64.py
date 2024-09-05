@@ -34,7 +34,7 @@ class Nexus:
         dev_name = usbtty.get_Nexus_usb()
 
         try:
-            self.ser = serial.Serial(device, baudrate=9600)
+            self.ser = serial.Serial(dev_name, baudrate=9600)
             time.sleep(0.1)
             self.ser.write(b":P#")
             time.sleep(0.1)
