@@ -36,7 +36,7 @@ from datetime import timezone
 from shutil import copyfile
 
 home_path = str(Path.home())
-version = "25_4"
+version = "26_3"
 
 if len(sys.argv) > 1:
     os.system('pkill -9 -f eFinder.py') # stops the autostart eFinder program running
@@ -49,7 +49,6 @@ offset_flag = False
 offset = 640, 480
 star_name = "no star"
 solve = False
-sDog = True
 gotoFlag = False
 fnt = ImageFont.truetype(home_path+"/Solver/text.ttf",8)
 
@@ -292,7 +291,7 @@ def flip():
 def update_summary():
     global param
     arr[1, 0][0] = ("Ex:" + str(param["Exposure"]) + "  Gn:" + str(param["Gain"]))
-    if drive == True:
+    if drive != 'none':
         arr[1, 0][1] = "Test:" + str(param["Test mode"]) + " GoTo++:" + str(param["Goto++ mode"])
     else:
         arr[1, 0][1] = "Test:" + str(param["Test mode"])
@@ -335,7 +334,7 @@ def readTarget():
     if (goto_ra[0:2] == "00" and goto_ra[3:5] == "00"):  # not a valid goto target set yet.
         print("no GoTo target")
         handpad.display("no GoTo target","set yet","")
-        return
+        return False
     goto_dec = nexus.get(":Gd#")
     ra = goto_ra.split(":")
     dec = re.split(r"[:*]", goto_dec)
@@ -343,45 +342,55 @@ def readTarget():
             abs(abs(float(dec[0])) + float(dec[1]) / 60 + float(dec[2]) / 3600),
             float(dec[0]))
     print("Target goto RA & Dec", goto_ra, goto_dec)
+    return True
 
 def goto():
     global gotoFlag
-    if drive == False:
+    if drive == 'none':
         handpad.display("No Drive", "Connected", "")
         return
     handpad.display("Starting", "GoTo", "")
     gotoFlag = True
-    readTarget()
+    if readTarget() == False:
+        return
     if gotoDistant():
-        if sDog == True:     
+        if drive == 'sDog':     
             nexus.write(":Sr" + goto_ra + "#")
             nexus.write(":Sd" + goto_dec + "#")
             reply = nexus.get(":MS#")
-        else:    
+        elif drive == 'sCat':    
             gotoStr = '%s%06.3f %+06.3f' %("g",goto_radec[0],goto_radec[1])
             print("Target goto RA & Dec", gotoStr)
             servocat.send(gotoStr)
+        elif drive == 'sTrack':
+            skyTrack.send('G')
         handpad.display("Performing", " GoTo", "")
         time.sleep(1)
         gotoStopped()
         handpad.display("Finished", " GoTo", "")
         go_solve()
         if int(param["Goto++ mode"]) == 0:
+            gotoFlag = False
             return
     handpad.display("Attempting", " GoTo++", "")
     align() # close, so local sync scope to true RA & Dec
-    if sDog == True:
+    if drive == 'sDog':
         nexus.write(":Sr" + goto_ra + "#")
         nexus.write(":Sd" + goto_dec + "#")
         reply = nexus.get(":MS#")
-    else:
+    elif drive == 'sCat':
         gotoStr = '%s%06.3f %+06.3f' %("g",goto_radec[0],goto_radec[1])
         print('GoToStr: ',gotoStr)
         servocat.send(gotoStr)
+    elif drive == 'sTrack':
+        skyTrack.send('G')
     gotoStopped()
     gotoFlag = False
     handpad.display("Finished", " GoTo++", "")
     go_solve()
+
+def abortGoto():
+    skyTrack.send('U')
 
 def setGoto():
     global align_count, solve, sync_count, param, offset_flag, arr
@@ -410,7 +419,7 @@ def gotoStopped():
         time.sleep(2)
         radec = getRadec()
         print('%s %3.6f %3.6f %s' % ('RA Dec delta', (radecNow[0] - radec[0])*15,radecNow[1]-radec[1],'degrees'))
-        if (abs(radecNow[0] - radec[0])*15 < 0.01) and (abs(radecNow[1] - radec[1]) < 0.01):
+        if (abs(radecNow[0] - radec[0])*15 < 0.02) and (abs(radecNow[1] - radec[1]) < 0.02):
             return
         else:
             radecNow = radec
@@ -718,14 +727,19 @@ if param["Drive ('scopedog' or 'servocat')"].lower()=='servocat':
     import ServoCat
     servocat = ServoCat.ServoCat()
     sDog = False
-    drive = True
+    drive = 'sCat'
     arr[2,0][1] = "ServoCat mode"
 elif param["Drive ('scopedog' or 'servocat')"].lower()=='scopedog':
-    drive = True
+    drive = 'sDog'
     arr[2,0][1] = "ScopeDog mode"
+elif param["Drive ('scopedog' or 'servocat')"].lower()=='skytracker':
+    import SkyTracker
+    skyTrack = SkyTracker.SkyTracker()
+    drive = 'sTrack'
+    arr[2,0][1] = "SkyTracker mode"
 else:
     arr[2,0][1] = "No drive"
-    drive = False
+    drive = 'none'
 print(arr[2,0][1])
 
 if param["Ramdisk"].lower()=='true':
