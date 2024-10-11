@@ -10,6 +10,7 @@ class usbAssign:
         else:
             self.usbNexus = "/dev/ttyAMA3"
         self.usbServocat = "/dev/ttyUSB0"
+        self.usbSkyTracker = "/dev/ttyUSB0"
         self.usbGps = "not found"
         all_ports = list_ports.comports()
         i=0
@@ -36,3 +37,6 @@ class usbAssign:
     
     def get_ServoCat_usb(self) -> str:
         return self.usbServocat
+    
+    def get_SkyTracker_usb(self) -> str:
+        return self.usbSkyTracker
