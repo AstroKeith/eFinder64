@@ -13,8 +13,9 @@ Full details at [
 Note: As of September 2024 uart3 is used instead of uart0 on the Pi5. Old hardware builds will need to be modified (switch two pairs of wires on the GPIO)
 
 # Version notes
-eFinder26_3.py is the latest stable version.
+eFinder26_4.py is the latest stable version.
 Adds support for Sitech drives.
+Adds new 2 star alignment process (same really - but new screens)
 
 ## Operation
 The handbox version will autostart on power up.
