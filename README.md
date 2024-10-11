@@ -4,22 +4,17 @@ code for AltAz telescopes (primarily Dobsonians) to utilise plate-solving to imp
 Requires:
 - Raspberry Pi (4 or 5) running Bookworm 64 bit OS
 - A custom hand box (Raspberry Pi Pico, OLED display and switches) connected via USB
-- A Nexus DSC with optical encoders, connected with a ttl to USB cable from TXD0 & RXD0
+- A Nexus DSC with optical encoders, connected with a ttl to USB cable
 - An ASI Camera (Suggest ASI120MM-S), with 50mm f1.8 or faster cctv lens
 
 Full details at [
 ](https://astrokeith.com/equipment/efinder/)https://astrokeith.com/equipment/efinder/
 
-Note: As of September 2024 uart3 is used instead of uart0. Old hardware builds will need to be modified (switch two pairs of wires on the GPIO)
+Note: As of September 2024 uart3 is used instead of uart0 on the Pi5. Old hardware builds will need to be modified (switch two pairs of wires on the GPIO)
 
 # Version notes
-eFinder25_4.py is the latest stable version.
-Adds support for the Pi HQ camera, a focus/exposure screen utility and web page server.
-- It requires the handpad to use main_eF4_1.py.
-- It requires Tetra3 to be installed
-- Requires the new Display_64.py & Nexus_64.py (best to do a complete new pull_
-- starnames.csv is required
-- text.ttf is required
+eFinder26_3.py is the latest stable version.
+Adds support for Sitech drives.
 
 ## Operation
 The handbox version will autostart on power up.
