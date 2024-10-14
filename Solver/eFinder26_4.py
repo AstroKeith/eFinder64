@@ -244,6 +244,7 @@ def doAlign():
     solveImage()
     if solve == False:
         handpad.display(arr[x, y][0], "Solved Failed", arr[x, y][2])
+        time.sleep(5)
         return
     align_ra = ":Sr" + coordinates.dd2dms((solved_radec)[0]) + "#"
     align_dec = ":Sd" + coordinates.dd2aligndms((solved_radec)[1]) + "#"
