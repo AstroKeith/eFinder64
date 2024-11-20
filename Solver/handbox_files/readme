@@ -1,1 +1,9 @@
+These are files needed to program or maintain the universal scopedog/eFinder hand box
 
+flash_nuke.uf2 will, if copied to a Pico, reset it to factory state (wiped!)
+
+RPI_PICO-20220618-v1.19.1.u2 is a stable Pico OS. Some more recent versions has issues.
+
+main_eF4_1.py should be saved to the Pico as 'main.py'. If a longer duration for a 'long OK' is desired, use main_eF4_2.py
+
+copy bright.txt to the Pico. This is a simple text file containing a number between 1 and 254 which will set the display brightness, but can be changed later from the handbox.
