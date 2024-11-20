@@ -121,6 +121,7 @@ sudo chmod a+rwx /home/efinder/Solver
 sudo chmod a+rwx /home/efinder/Solver/eFinder.config
 sudo cp eFinder64/Solver/www/*.* /var/www/html
 sudo mv /var/www/html/index.html /var/www/html/apacheindex.html
+sudo chmod -R 755 /var/www/html
 
 mkdir /home/efinder/.config/autostart
 cp /home/efinder/eFinder64/efinder.desktop /home/efinder/.config/autostart
