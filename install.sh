@@ -52,6 +52,7 @@ sudo wget https://github.com/dstndstn/astrometry.net/tree/main/catalogs/abell-al
 cd $HOME
 python -m venv /home/efinder/venv-efinder --system-site-packages
 venv-efinder/bin/python venv-efinder/bin/pip install astropy pyfits
+venv-efinder/bin/python venv-efinder/bin/pip install tzlocal
 mkdir /home/efinder/Solver
 mkdir /home/efinder/Solver/Stills
 mkdir /home/efinder/Solver/data
