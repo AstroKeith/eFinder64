@@ -18,7 +18,7 @@ class Seestar():
         self.logger = self.CreateLogger()
         version_string = "ver 1"
         self.logger.info(f"Seestar Control with ScopeDog: {version_string}")
-        self.HOST = '10.0.0.1'
+        self.HOST = 'SeeStar.local'
         self.PORT = 4700
         tz_name = tzlocal.get_localzone_name()
         tz = tzlocal.get_localzone()
