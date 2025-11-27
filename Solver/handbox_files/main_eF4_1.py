@@ -217,7 +217,7 @@ if __name__=='__main__':
         OLED.text("hand pad code",1,12,OLED.white)
         OLED.text(version,1,23,OLED.white)
         OLED.show()
-        sys.exit()
+        exit()
     
     _thread.start_new_thread(read_joystick, ())
 
